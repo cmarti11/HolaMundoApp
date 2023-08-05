@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:HolaMundoApp.ViewModels"
              xmlns:utility="clr-namespace:HolaMundoApp.Utilities"
+             xmlns:resx="clr-namespace:HolaMundoApp.Resx"
              utility:ViewModelLocator.AutoWireViewModel="True"
              x:DataType="viewModels:LoginViewModel"
              xmlns:local="clr-namespace:HolaMundoApp;assembly=HolaMundoApp"
@@ -14,8 +15,8 @@
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
             <Image Source="{local:ImageResource HolaMundoApp.Resources.Images.duck.JPG}" WidthRequest="200" HeightRequest="200" />
-            <Entry Text="{Binding UserName}" Placeholder="Username" TextColor="Black" />
-            <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="True" TextColor="Black" />
+            <Entry Text="{Binding UserName}" Placeholder="{Static resx:AppResources.LoginPageUserNameText}" TextColor="Black" />
+            <Entry Text="{Binding Password}" Placeholder="{Static resx:AppResources.LoginPagePasswordText}" IsPassword="True" TextColor="Black" />
             <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>

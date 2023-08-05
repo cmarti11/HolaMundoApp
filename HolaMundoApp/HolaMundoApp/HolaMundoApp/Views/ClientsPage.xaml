@@ -2,27 +2,70 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:HolaMundoApp.Data.Models"
+             xmlns:controls="clr-namespace:HolaMundoApp.Controls"
              xmlns:viewModels="clr-namespace:HolaMundoApp.ViewModels"
              xmlns:utility="clr-namespace:HolaMundoApp.Utilities"
              utility:ViewModelLocator.AutoWireViewModel="True"
              x:DataType="viewModels:ClientsViewModel"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             x:Class="HolaMundoApp.Views.ClientsPage">
+             x:Class="HolaMundoApp.Views.ClientsPage"
+             Padding="10">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ClientDefaultTemplate" x:DataType="models:Client">
+                <StackLayout>
+                    <Frame CornerRadius="15"
+                           BackgroundColor="AliceBlue">
+                        <Grid ColumnDefinitions="*,*">
+                            <Label Text="{Binding Name}" TextColor="Black" />
+                            <Label Grid.Column="1" Text="{Binding Dna}" TextColor="Black"/>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="ClientOneToFiveTemplate" x:DataType="models:Client">
+                <StackLayout>
+                    <Frame CornerRadius="15"
+                           BackgroundColor="LightGray">
+                        <Grid ColumnDefinitions="*,*">
+                            <Label Text="{Binding Name}" TextColor="Black"/>
+                            <Label Grid.Column="1" Text="{Binding Dna}" TextColor="Black"/>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="ClientSixToTenTemplate" x:DataType="models:Client">
+                <StackLayout>
+                    <Frame CornerRadius="15"
+                           BackgroundColor="LightCoral">
+                        <Grid ColumnDefinitions="*,*">
+                            <Label Text="{Binding Name}" TextColor="Black"/>
+                            <Label Grid.Column="1" Text="{Binding Dna}" TextColor="Black"/>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+            </DataTemplate>
+
+            <controls:ClientTemplateSelector x:Key="ClientTemplateSelector"
+                                             DefaultTemplate="{StaticResource ClientDefaultTemplate}"
+                                             OneToFiveTemplate="{StaticResource ClientOneToFiveTemplate}"
+                                             SixToTenTemplate="{StaticResource ClientSixToTenTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Behaviors>
         <xct:EventToCommandBehavior EventName="Appearing" Command="{Binding AppearingCommand}"/>
     </ContentPage.Behaviors>
     <ContentPage.Content>
         <StackLayout>
             <CollectionView BackgroundColor="AliceBlue" ItemsSource="{Binding Clients}"
-                            EmptyView="No Clients to display">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Client">
-                        <StackLayout>
-                            <Label Text="{Binding Name}" TextColor="Black"/>
-                            <Label Text="{Binding Dna}" TextColor="Black"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
+                            EmptyView="No Clients to display"
+                            ItemTemplate="{StaticResource ClientTemplateSelector}">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="*,*">
+                        <Label Text="Name" TextColor="Black"/>
+                        <Label Grid.Column="1" Text="DNA" TextColor="Black"/>
+                    </Grid>
+                </CollectionView.Header>
             </CollectionView>
         </StackLayout>
     </ContentPage.Content>

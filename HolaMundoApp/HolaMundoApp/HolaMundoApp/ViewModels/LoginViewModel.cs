@@ -1,4 +1,5 @@
-﻿using HolaMundoApp.Views;
+﻿using HolaMundoApp.Resx;
+using HolaMundoApp.Views;
 using Xamarin.Forms;
 
 namespace HolaMundoApp.ViewModels
@@ -24,6 +25,11 @@ namespace HolaMundoApp.ViewModels
             if (ValidateFields())
             {
                 await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            } 
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert(AppResources.LoginPageInvalidLoginTitle,
+                    AppResources.LoginPageInvalidLoginMessage, AppResources.OkText);
             }
         }
         private bool ValidateFields()
