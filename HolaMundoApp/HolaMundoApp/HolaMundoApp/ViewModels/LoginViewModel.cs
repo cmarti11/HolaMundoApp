@@ -1,4 +1,5 @@
 ﻿using HolaMundoApp.Resx;
+using HolaMundoApp.Services;
 using HolaMundoApp.Views;
 using Xamarin.Forms;
 
@@ -6,10 +7,14 @@ namespace HolaMundoApp.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public LoginViewModel()
+        private readonly IAccountService _accountService;
+
+        public LoginViewModel(IAccountService accountService)
         {
+            _accountService = accountService;
             LoginCommand = new Command(OnLoginClicked);
         }
+
 
         private string _username;
         private string _password;
@@ -22,7 +27,7 @@ namespace HolaMundoApp.ViewModels
         private async void OnLoginClicked(object obj)
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            if (ValidateFields())
+            if (ValidateFields() && await _accountService.LoginAsync(UserName, Password))
             {
                 await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
             } 

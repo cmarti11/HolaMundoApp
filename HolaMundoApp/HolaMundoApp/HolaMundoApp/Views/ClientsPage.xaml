@@ -13,7 +13,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="ClientDefaultTemplate" x:DataType="models:Client">
-                <StackLayout>
+                <StackLayout Margin="0,5">
                     <Frame CornerRadius="15"
                            BackgroundColor="AliceBlue">
                         <Grid ColumnDefinitions="*,*">
@@ -24,7 +24,7 @@
                 </StackLayout>
             </DataTemplate>
             <DataTemplate x:Key="ClientOneToFiveTemplate" x:DataType="models:Client">
-                <StackLayout>
+                <StackLayout Margin="0,5">
                     <Frame CornerRadius="15"
                            BackgroundColor="LightGray">
                         <Grid ColumnDefinitions="*,*">
@@ -35,7 +35,7 @@
                 </StackLayout>
             </DataTemplate>
             <DataTemplate x:Key="ClientSixToTenTemplate" x:DataType="models:Client">
-                <StackLayout>
+                <StackLayout Margin="0,5">
                     <Frame CornerRadius="15"
                            BackgroundColor="LightCoral">
                         <Grid ColumnDefinitions="*,*">
