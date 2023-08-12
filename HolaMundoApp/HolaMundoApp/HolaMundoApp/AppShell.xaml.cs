@@ -1,7 +1,5 @@
-﻿using HolaMundoApp.ViewModels;
-using HolaMundoApp.Views;
+﻿using HolaMundoApp.Views;
 using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace HolaMundoApp
@@ -11,6 +9,7 @@ namespace HolaMundoApp
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(ClientPage), typeof(ClientPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
