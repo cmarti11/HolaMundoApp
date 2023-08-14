@@ -1,13 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:utility="clr-namespace:HolaMundoApp.Utilities"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:viewModels="clr-namespace:HolaMundoApp.ViewModels"
-             utility:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:converters="clr-namespace:HolaMundoApp.Converters"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:DataType="viewModels:ClientViewModel"
              Title="Client"
              x:Class="HolaMundoApp.Views.ClientPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DoubleToColorConverter x:Key="DoubleToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Behaviors>
         <xct:EventToCommandBehavior EventName="Appearing" Command="{Binding AppearingCommand}"/>
     </ContentPage.Behaviors>
@@ -33,8 +38,10 @@
                 <Label Grid.Column="1" Grid.Row="3" Text="{Binding Client.Weight}" />
 
                 <Label Grid.Column="0" Grid.Row="4" Text="Life Expectancy:" />
-                <Label Grid.Column="1" Grid.Row="4" Text="{Binding Client.LifeExpectancy}" />
+                <Label Grid.Column="1" Grid.Row="4" Text="{Binding Client.LifeExpectancy}"
+                       TextColor="{Binding Client.LifeExpectancy,Converter={StaticResource DoubleToColorConverter}}"/>
             </Grid>
+            <maps:Map x:Name="ClientLocationMap" IsShowingUser="True"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
