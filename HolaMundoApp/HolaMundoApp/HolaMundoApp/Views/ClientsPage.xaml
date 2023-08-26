@@ -9,7 +9,8 @@
              x:DataType="viewModels:ClientsViewModel"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="HolaMundoApp.Views.ClientsPage"
-             Padding="10">
+             Padding="10"
+             Title="Clients">
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="ClientDefaultTemplate" x:DataType="models:Client">
@@ -69,19 +70,17 @@
     </ContentPage.Behaviors>
     <ContentPage.Content>
         <Grid>
-            <!--Page Content-->
-            <StackLayout IsVisible="{Binding IsNotBusy}" VerticalOptions="FillAndExpand">
+            <!--Page Content-->            
+            <RefreshView 
+                Command="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRefreshing}" 
+                VerticalOptions="FillAndExpand">
                 <CollectionView ItemsSource="{Binding Clients}"
-                        EmptyView="No Clients to display"                 
-                        ItemTemplate="{StaticResource ClientTemplateSelector}">
-                    <CollectionView.Header>
-                        <Grid ColumnDefinitions="*,*" Margin="0,10">
-                            <Label Text="Name" TextColor="Black"/>
-                            <Label Grid.Column="1" Text="DNA" TextColor="Black"/>
-                        </Grid>
-                    </CollectionView.Header>
-                </CollectionView>
-            </StackLayout>
+                    IsVisible="{Binding IsNotBusy}"
+                    EmptyView="No Clients to display"                 
+                    ItemTemplate="{StaticResource ClientTemplateSelector}"/>
+            </RefreshView>
+
             <!--Loading Indicator-->
             <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="Center" />
         </Grid>
