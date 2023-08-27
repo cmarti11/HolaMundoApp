@@ -7,6 +7,7 @@
              xmlns:utility="clr-namespace:HolaMundoApp.Utilities"
              xmlns:resx="clr-namespace:HolaMundoApp.Resx"
              utility:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:DataType="viewModels:LoginViewModel"
              xmlns:local="clr-namespace:HolaMundoApp;assembly=HolaMundoApp"
              mc:Ignorable="d"
@@ -15,8 +16,20 @@
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
             <Image Source="{local:ImageResource HolaMundoApp.Resources.Images.duck.JPG}" WidthRequest="200" HeightRequest="200" />
-            <Entry Text="{Binding UserName}" Placeholder="{Static resx:AppResources.LoginPageUserNameText}" TextColor="Black" />
-            <Entry Text="{Binding Password}" Placeholder="{Static resx:AppResources.LoginPagePasswordText}" IsPassword="True" TextColor="Black" />
+            <Entry Text="{Binding UserName}" Placeholder="Username">
+                <Entry.Triggers>
+                    <Trigger TargetType="Entry" Property="Text" Value="{x:Static sys:String.Empty}">
+                        <Setter Property="BackgroundColor" Value="LightGray" />
+                    </Trigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="True" >
+                <Entry.Triggers>
+                    <Trigger TargetType="Entry" Property="Text" Value="{x:Static sys:String.Empty}">
+                        <Setter Property="BackgroundColor" Value="LightGray" />
+                    </Trigger>
+                </Entry.Triggers>
+            </Entry>
             <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>

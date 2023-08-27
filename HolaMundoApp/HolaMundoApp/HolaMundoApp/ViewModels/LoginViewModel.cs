@@ -15,9 +15,8 @@ namespace HolaMundoApp.ViewModels
             LoginCommand = new Command(OnLoginClicked);
         }
 
-
-        private string _username;
-        private string _password;
+        private string _username = string.Empty;
+        private string _password = string.Empty;
 
         public string UserName { get => _username; set => SetProperty(ref _username, value); }
         public string Password { get => _password; set => SetProperty(ref _password, value); }
@@ -33,6 +32,7 @@ namespace HolaMundoApp.ViewModels
             } 
             else
             {
+                MessagingCenter.Send(this, "Fail");
                 await Application.Current.MainPage.DisplayAlert(AppResources.LoginPageInvalidLoginTitle,
                     AppResources.LoginPageInvalidLoginMessage, AppResources.OkText);
             }
